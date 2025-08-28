@@ -31,6 +31,8 @@ const pantallaHistorial = document.getElementById("pantalla-historial");
 const contenedorHistorial = document.getElementById("historial-container");
 const btnVerHistorial = document.getElementById("btn-ver-historial");
 
+const API_BASE_URL = 'https://applh-a2.vercel.app';
+
 const sonidoCorrecto = new Audio("audio/correct.mp3");
 const sonidoIncorrecto= new Audio("audio/incorrect.mp3");
 
@@ -46,23 +48,57 @@ function mostrarPantalla(idPantalla) {
 }
 
 // Cargar lista de lecciones
-function cargarLecciones() {
-  leccionesContainer.innerHTML = '';
-  datosLecciones.forEach((leccion, index) => {
-    const btn = document.createElement('button');
-    btn.textContent = leccion.nombre;
-    btn.addEventListener('click', () => seleccionarLeccion(index));
-    leccionesContainer.appendChild(btn);
-  });
+/**
+ * Pide a la API la lista de lecciones del nivel A2 y las muestra en pantalla.
+ */
+async function fetchAndShowLessons() {
+    if (!leccionesContainer) return;
+    
+    leccionesContainer.innerHTML = "<p>Cargando lecciones...</p>";
+
+    try {
+        // 1. Hacemos la petición a la API, pidiendo explícitamente el nivel A2
+        const response = await fetch(`${API_BASE_URL}/api/lessons?level=A2`);
+        
+        if (!response.ok) {
+            throw new Error('Error al cargar las lecciones desde el servidor.');
+        }
+
+        const lecciones = await response.json();
+        leccionesContainer.innerHTML = "";
+
+        if (lecciones.length === 0) {
+            leccionesContainer.innerHTML = "<p>No hay lecciones disponibles.</p>";
+            return;
+        }
+        
+        // 2. Creamos un botón por cada lección recibida
+        lecciones.forEach(leccion => {
+            const btn = document.createElement("button");
+            btn.textContent = `Lección ${leccion.lessonNumber}: ${leccion.title}`;
+            btn.className = "leccion-btn";
+            btn.addEventListener("click", () => {
+                // Al hacer clic, pasamos el ID único de la lección y su título
+                seleccionarLeccion(leccion._id, leccion.title); 
+            });
+            leccionesContainer.appendChild(btn);
+        });
+
+    } catch (error) {
+        leccionesContainer.innerHTML = `<p style="color:red;">${error.message}</p>`;
+    }
 }
 
-// Seleccionar lección y mostrar actividades
-function seleccionarLeccion(indice) {
-  leccionSeleccionada = datosLecciones[indice];
-  document.getElementById("titulo-leccion").textContent = leccionSeleccionada.nombre;
-
-  // Mostrar pantalla actividades y asignar eventos
-  mostrarPantalla("pantalla-actividades");
+/**
+ * Guarda el ID de la lección seleccionada y muestra la siguiente pantalla.
+ */
+function seleccionarLeccion(leccionId, leccionTitulo) {
+    // Aquí guardas la información que necesitarás para el siguiente paso
+    leccionSeleccionada = { id: leccionId, titulo: leccionTitulo }; 
+    
+    // Muestra la pantalla de actividades (donde están los botones "Lesen" y "Hören")
+    document.getElementById("titulo-leccion").textContent = leccionTitulo;
+    mostrarPantalla("pantalla-actividades");
 }
 
 // Mostrar lista de sub-actividades (para leer o escuchar)
@@ -282,10 +318,13 @@ btnReiniciarPuntos.addEventListener("click", () => {
 });
 
 // Eventos botones navegación
-btnIniciar.addEventListener('click', () => {
-  mostrarPantalla("pantalla-lecciones");
-  cargarLecciones();
-});
+const btnEmpezar = document.getElementById('btn-iniciar');
+    if (btnEmpezar) {
+        btnEmpezar.addEventListener('click', () => {
+            mostrarPantalla('pantalla-lecciones'); // Muestra la pantalla de lecciones
+            fetchAndShowLessons(); // Y carga el contenido
+        });
+    }
 
 btnVolverInicio.addEventListener('click', () => {
   mostrarPantalla("pantalla-inicio");
