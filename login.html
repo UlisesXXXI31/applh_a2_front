@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Language Solutions - Iniciar Sesión</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div id="pantalla-login" class="pantalla-activa" style="text-align: center; padding: 2rem;">
+        <img src="/languagesolutionsa2/eis.jpg" alt="Language Solutions Logo" style="width: 120px; height: 120px;">
+        <h1 style="margin-top: 1rem;">Language Solutions</h1>
+        <p>Aprende Vocabulario de A2 de forma interactiva</p>
+
+        <form id="form-login" style="margin-top: 2rem;">
+            <input type="email" id="input-email" placeholder="Correo del colegio" required>
+            <br>
+            <input type="password" id="input-password" placeholder="Contraseña" required>
+            <br>
+            <br>
+            <button type="button" id="btn-acceder" style="font-size: 1.5rem; padding: 1rem 2rem; cursor: pointer;">
+            Acceder
+            </button>
+        </form>
+        <div id="status-message" style="margin-top: 1rem;"></div>
+    </div>
+
+    <footer style="text-align:center; margin-top: 30px; font-size: 14px;">
+        developed by DGR
+    </footer>
+   
+    <script src="login.js"></script>
+</body>
+</html>

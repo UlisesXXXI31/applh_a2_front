@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Profesor</title>
+    <button id="btn-logout">Cerrar sesión</button>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .student-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .student-card h2 {
+            margin-top: 0;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px 0;
+        }
+        .form-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 95%;
+            padding: 8px;
+        }
+        #status-message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Panel de Control del Profesor</h1>
+
+    <div class="form-container">
+        <h2>Añadir Nuevo Alumno</h2>
+        <form id="form-add-student">
+            <div class="input-group">
+                <label for="student-name">Nombre del Alumno:</label>
+                <input type="text" id="student-name" required>
+            </div>
+            <div class="input-group">
+                <label for="student-email">Correo Electrónico:</label>
+                <input type="email" id="student-email" required>
+            </div>
+            <div class="input-group">
+                <label for="student-role">rol:</label>
+                <input type="text" id="student-role" required>
+            </div>
+            <button type="submit" id="btn-add-student">Añadir Alumno</button>
+        </form>
+        <div id="status-message"></div>
+    </div>
+
+    <div id="student-list">
+        <p>Cargando lista de alumnos...</p>
+    </div>
+    <div id="student-progress" style="display:none; margin-top: 30px;">
+    <h2>Progreso de <span id="student-name-title"></span></h2>
+    <button id="btn-back-to-list" style="margin-bottom: 15px;">Volver a la lista</button>
+    <div id="progress-history-container">
+        </div>
+</div>
+    
+    <script src="teacher.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comprensión Lectora y Auditiva</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>App Interactiva: Leseverstehen & Hörverstehen</h1>
+    <p id="puntos">Puntos totales: 0</p>
+    <button id="btn-reiniciar-puntos">Reiniciar puntos</button>
+    <!-- index.html -->
+     <button id="btn-ver-historial">Ver historial</button>
+  </header>
+
+  <!-- Pantalla de inicio -->
+  <div id="pantalla-inicio" class="pantalla pantalla-activa">
+    <div style="text-align: center; padding: 2rem;">
+      <img src="EIS.jpg" alt="Language Solutions Logo" style="width: 120px; height: 120px;" />
+      <h1 style="margin-top: 1rem;">Language Solutions A2</h1>
+      <p>Practica Hören y Lesen</p>
+      <button id="btn-iniciar">Iniciar</button>
+    </div>
+  </div>
+
+
+  <!-- Pantalla de lecciones -->
+  <section id="pantalla-lecciones" class="pantalla pantalla-oculta">
+    <h2>Selecciona una lección</h2>
+    <div id="lecciones-container"></div>
+    <button id="btn-volver-inicio">Volver al inicio</button>
+  </section>
+
+  <!-- Pantalla de actividades -->
+  <section id="pantalla-actividades" class="pantalla pantalla-oculta">
+    <h2 id="titulo-leccion">Actividades</h2>
+    <div id="actividades-container" style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 50px;">
+      <button id="btn-horen">Hören</button>
+      <button id="btn-lesen">Lesen</button>
+    </div>
+    <button id="btn-volver-lecciones">Volver a lecciones</button>
+  </section>
+
+  <!-- Pantalla de actividad -->
+<section id="pantalla-actividad" class="pantalla pantalla-oculta">
+  <h2 id="titulo-actividad"></h2>
+  <div id="contenido-actividad"></div> <!-- botones Teil 1, 2... -->
+  <div id="actividad-juego"></div>     <!-- texto de lectura o audio -->
+  <div id="preguntas-actividad"></div> <!-- preguntas y opciones -->
+  <div id="mensaje-feedback"></div>
+  <button id="btn-volver-actividades">Volver a actividades</button>
+</section>
+
+  <!-- Pantalla de historial -->
+<div id="pantalla-historial" class="pantalla pantalla-oculta">
+  <h2>Historial de puntuaciones</h2>
+  <div id="historial-container"></div>
+  <button id="btn-salir-historial">Volver</button>
+</div>
+
+  <script src="lecciones.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

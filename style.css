@@ -1,0 +1,170 @@
+/* style.css para app de Leseverstehen y Hörverstehen */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f8f9fa;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: #004d99;
+  color: white;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.pantalla {
+  display: none;
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+.pantalla-activa {
+  display: block;
+}
+
+button {
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin: 0.5rem 0;
+}
+
+button:hover:not(:disabled) {
+  background-color: #004d99;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: default;
+}
+
+#lecciones-container button,
+#contenido-actividad button,
+#preguntas-actividad button {
+  width: 100%;
+  max-width: 350px;
+  margin: 0.5rem auto;
+  display: block;
+  text-align: center;
+}
+
+#mensaje-feedback {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  min-height: 2rem;
+}
+
+audio {
+  display: block;
+  margin: 1rem auto;
+  max-width: 100%;
+}
+.opciones-container, .zonas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 1em 0;
+}
+
+.draggable {
+  padding: 8px 12px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  cursor: grab;
+  border-radius: 8px;
+}
+
+.drop-zone {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 2px dashed #aaa;
+  border-radius: 8px;
+  min-width: 200px;
+}
+
+.zona-respuesta {
+  font-weight: bold;
+  margin-left: 5px;
+}
+.drop-zone {
+  display: flex;           /* Asegura alineación horizontal */
+  align-items: center;     /* Centra verticalmente */
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.drop-zone .nombre-persona {
+  font-weight: bold;
+  color: #004d99;
+  margin-right: 5px;
+}
+
+.drop-zone .espacio-respuesta {
+  min-width: 120px;
+  border-bottom: 2px dashed #aaa;
+  padding: 0 5px;
+  height: 24px;
+}
+
+/* Ocultar elementos arrastrados */
+.draggable.arrastrado {
+  visibility: hidden;
+}
+.espacio-respuesta {
+  transition: all 0.3s ease;
+}
+
+.drop-zone.highlight {
+  background-color: rgba(0, 102, 204, 0.1);
+}
+/* Encabezado de actividad */
+.activity-header {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.activity-header h3 {
+  color: #004d99;
+  margin-top: 0;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.instrucciones {
+  color: #333;
+  font-size: 0.95em;
+  margin: 10px 0;
+}
+
+.ejemplo {
+  background: #fff8e1;
+  padding: 8px 12px;
+  border-left: 3px solid #ffc107;
+  margin: 10px 0;
+  font-style: italic;
+}
+
+/* Contenido principal */
+.texto-actividad p {
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+.audio-player {
+  width: 100%;
+  margin: 15px 0;
+}
