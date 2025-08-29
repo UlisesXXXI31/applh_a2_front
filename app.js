@@ -377,9 +377,9 @@ btnReiniciarPuntos.addEventListener("click", () => {
 });
 
 // Eventos botones navegación
-const btnEmpezar = document.getElementById('btn-iniciar');
-    if (btnEmpezar) {
-        btnEmpezar.addEventListener('click', () => {
+const btniniciar = document.getElementById('btn-iniciar');
+    if (btnIniciar) {
+        btnIniciar.addEventListener('click', () => {
             mostrarPantalla('pantalla-lecciones'); // Muestra la pantalla de lecciones
             fetchAndShowLessons(); // Y carga el contenido
         });
