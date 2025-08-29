@@ -1,23 +1,21 @@
 {
-  "name": "Language Solutions",
-  "short_name": "LaSo",
-  "theme_color": "#2196f3",
-  "background_color": "#2196f3",
-  "display": "standalone",
-  "scope": ".",
-  "start_url": ".",
-  "orientation": "portrait",
+  "name": "Language Solutions A2",
+  "short_name": "LH A2", 
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/applh_a2/android-chrome-192x192.png", 
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png",
+      "src": "/applh_a2/android-chrome-512x512.png", 
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "description": "Se trata de una aplicación web dirigida a alumnos que estudian alemán, para que puedan aprender vocabulario del nivel A2 de manera interactiva, a través de varias actividades."
+  "theme_color": "#2196f3",
+  "background_color": "#000000",
+  "display": "standalone",
+  "scope": ".",
+  "start_url": "."
 }
