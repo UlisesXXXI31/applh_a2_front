@@ -255,22 +255,71 @@ function actualizarPuntos() {
   puntosTexto.textContent = `Puntos totales: ${puntos}`;
 }
 
-function guardarPuntuacionEnHistorial() {
-  const puntosSesion = puntos - puntosUltimaSesion;
-  if (puntosSesion <= 0) return;
+// Funciones de historial y API
+    function guardarPuntuacionEnHistorial() {
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        if (!userData || !userData.id) {
+            console.error("Error: No se pudo guardar el progreso. Usuario no autenticado.");
+            const correo = localStorage.getItem("correoAlumno") || "Sin correo";
+            const historial = JSON.parse(localStorage.getItem("historialPuntos")) || [];
+            const puntosSesion = puntos - puntosUltimaSesion;
+            if (puntosSesion > 0) {
+                historial.push({
+                    fecha: new Date().toLocaleString(),
+                    leccion: leccionActual ? leccionActual.nombre : "Sin lección",
+                    actividad: actividadActual || "Sin actividad",
+                    puntos: puntosSesion,
+                    correo: correo
+                });
+                localStorage.setItem("historialPuntos", JSON.stringify(historial));
+            }
+            puntosUltimaSesion = puntos;
+            return;
+        }
 
-  const historial = JSON.parse(localStorage.getItem("historialPuntos")) || [];
-  const correo = localStorage.getItem("correoAlumno") || "Sin correo";
+        const puntosSesion = puntos - puntosUltimaSesion;
+        if (puntosSesion <= 0) {
+            puntosUltimaSesion = puntos;
+            return;
+        }
 
-  historial.push({
-    fecha: new Date().toLocaleString(),
-    puntos: puntosSesion,
-    correo: correo
-  });
+        const progressData = {
+            userId: userData.id,
+            lessonname: leccionActual ? leccionActual.nombre : "Sin lección",
+            taskName: actividadActual || "Sin actividad",
+            score: puntosSesion,
+            completed: true
+        };
 
-  localStorage.setItem("historialPuntos", JSON.stringify(historial));
-  puntosUltimaSesion = puntos;
-}
+        fetch(`${API_BASE_URL}/api/progress`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(progressData)
+       }) 
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al guardar el progreso en el servidor.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Progreso guardado con éxito en el servidor:", data);
+            })
+            .catch(error => {
+                console.error('Hubo un problema con la petición:', error);
+            });
+
+        const historial = JSON.parse(localStorage.getItem("historialPuntos")) || [];
+        historial.push({
+            fecha: new Date().toLocaleString(),
+            leccion: leccionActual ? leccionActual.nombre : "Sin lección",
+            actividad: actividadActual || "Sin actividad",
+            puntos: puntosSesion,
+            correo: userData.email
+        });
+        localStorage.setItem("historialPuntos", JSON.stringify(historial));
+        puntosUltimaSesion = puntos;
+    }
 btnVolverLecciones.addEventListener("click", () => {
  guardarPuntuacionEnHistorial();
  // guardarPuntuacion();
