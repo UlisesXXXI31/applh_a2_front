@@ -47,6 +47,16 @@ function mostrarPantalla(idPantalla) {
   document.getElementById(idPantalla).classList.add("pantalla-activa");
 }
 
+// Lógica de cerrar sesión
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            localStorage.removeItem('userData');
+            window.location.href = 'login.html'; // Redirigir a la página de login
+        });
+    }
+
 // Cargar lista de lecciones
 /**
  * Pide a la API la lista de lecciones del nivel A2 y las muestra en pantalla.
