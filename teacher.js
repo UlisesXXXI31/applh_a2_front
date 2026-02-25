@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // CORREGIDO: Usa la variable API_BASE_URL
             const response = await fetch(`${API_BASE_URL}/api/progress/${userId}`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${userId}`
                 }
             });
             
@@ -153,7 +153,7 @@ form.addEventListener('submit', async (e) => {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${userId}`
             },
             body: JSON.stringify({ name, email, password, role: 'student' })
         });
