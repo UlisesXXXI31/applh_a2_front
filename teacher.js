@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // CORREGIDO: Usa la variable API_BASE_URL
             const response = await fetch(`${API_BASE_URL}/api/users`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${userId}`
                 }
             });
             
